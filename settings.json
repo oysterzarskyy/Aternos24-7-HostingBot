@@ -6,7 +6,7 @@
     "type": "online"
   },
   "server": {
-    "ip": "urEarth.aternos.me",
+    "ip": "urEarth.aternos.me:52905",
     "port": 52905,
     "version": "",
     "try-creative": false
