@@ -322,19 +322,21 @@ function addInterval(callback, delay) {
   return id;
 }
 
-function getReconnectDelay() {
+function getReconnectDelay() { // fixed via gemini
   if (botState.wasThrottled) {
     botState.wasThrottled = false;
-    const throttleDelay = 60000 + Math.floor(Math.random() * 60000);
-    console.log(`[Bot] Throttle detected - extended delay: ${throttleDelay / 1000}s`);
-    return throttleDelay;
+    return 60000 + Math.floor(Math.random() * 60000);
   }
-  const baseDelay = config.utils['auto-reconnect-delay'] || 3000;
-  const maxDelay = config.utils['max-reconnect-delay'] || 30000;
+  // Base delay calculated exponentially by attempts
+  const baseDelay = config.utils['auto-reconnect-delay'] || 5000;
+  const maxDelay = config.utils['max-reconnect-delay'] || 45000;
   const delay = Math.min(baseDelay * Math.pow(2, botState.reconnectAttempts), maxDelay);
-  const jitter = Math.floor(Math.random() * 2000);
+  
+  // High random jitter (10-15 seconds) ensures old ghost connections clear out completely
+  const jitter = 10000 + Math.floor(Math.random() * 5000);
   return delay + jitter;
 }
+
 
 function createBot() {
   if (isReconnecting) {
