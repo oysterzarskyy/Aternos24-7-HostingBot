@@ -3,10 +3,10 @@
   "bot-account": {
     "username": "bot93514",
     "password": "mmurmmur",
-    "type": "online"
+    "type": "offline"
   },
   "server": {
-    "ip": "urEarth.aternos.me:52905",
+    "ip": "urEarth.aternos.me",
     "port": 52905,
     "version": "",
     "try-creative": false
